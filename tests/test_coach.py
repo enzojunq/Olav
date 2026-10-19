@@ -2,6 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
+from wearable_mcp.calendar import find_slots
 from wearable_mcp.coach import CoachService
 from wearable_mcp.guardrails import check_plan, load_goals
 from wearable_mcp.providers.garmin_workout import build_garmin_workout
@@ -69,13 +70,41 @@ def test_garmin_workout_json_structure():
     assert w["estimatedDurationInSecs"] == 3000
 
 
+def test_slots_use_real_calendar_not_fixed_window():
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+
+    tz = ZoneInfo("America/Los_Angeles")
+    busy = [{"title": "Hackathon", "start": "2026-10-19T11:00:00-07:00", "end": "2026-10-19T15:15:00-07:00"},
+            {"title": "Debate Night", "start": "2026-10-19T17:00", "end": "2026-10-19T20:00"},
+            {"title": "Hotel stay", "start": "2026-10-19", "end": "2026-10-22"}]  # all-day: ignored
+    r = find_slots("2026-10-19", 45, busy, load_goals(), now=datetime(2026, 10, 19, 13, 36, tzinfo=tz))
+    starts = [c["start"] for c in r["best"]]
+    assert r["free_windows"] == [{"start": "15:30", "end": "16:45"}, {"start": "20:15", "end": "21:30"}]
+    assert starts and all(("15:30" <= x <= "16:00") or ("20:15" <= x <= "20:45") for x in starts), r
+    assert {b["title"] for b in r["busy"]} == {"Hackathon", "Debate Night"}
+    assert not any(x == "18:00" for x in starts)  # old hardcoded answer now impossible
+
+
+def test_propose_requires_calendar_and_blocks_conflicts():
+    c = CoachService(MockProvider(), today=lambda: TODAY)
+    sess = [s(0, minutes=40)]
+    sess[0]["start_time"] = "18:00"
+    assert "calendar not checked" in c.propose(sess, "x")["violations"][0]
+    busy = [{"title": "Debate Night", "start": f"{TODAY}T17:00", "end": f"{TODAY}T20:00"}]
+    r = c.propose(sess, "x", busy)
+    assert not r["ok"] and "Debate Night" in r["violations"][0]
+    sess[0]["start_time"] = "15:30"
+    assert c.propose(sess, "x", busy)["ok"]
+
+
 def test_full_loop_with_mock_provider():
     c = CoachService(MockProvider(), today=lambda: TODAY)
     ctx = c.context()
     assert "sync_status" in ctx and "week_to_date" in ctx
-    bad = c.propose([s(i, minutes=150) for i in range(4)], "too much")
+    bad = c.propose([s(i, minutes=150) for i in range(4)], "too much", [])
     assert not bad["ok"]
-    good = c.propose([s(1, intensity="hard", name="Tempo"), s(2, "swimming", 40)], "ok")
+    good = c.propose([s(1, intensity="hard", name="Tempo"), s(2, "swimming", 40)], "ok", [])
     assert good["ok"]
     assert not c.apply("nonexistent", "sim")["ok"]
     applied = c.apply(good["plan_id"], "aprovo")

@@ -9,8 +9,10 @@ import os
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Any, Callable
+from zoneinfo import ZoneInfo
 
 from . import history
+from .calendar import conflicts, find_slots, normalize_busy
 from .guardrails import check_plan, load_goals, week_bounds
 from .providers import WearableProvider, get_provider
 
@@ -80,8 +82,28 @@ class CoachService:
         return {"window": [start, end], "items": history.compare(planned, actual)}
 
     # ---------------- Step 3: propose (validated in code) ----------------
-    def propose(self, sessions: list[dict[str, Any]], rationale: str) -> dict[str, Any]:
+    def propose(self, sessions: list[dict[str, Any]], rationale: str,
+                calendar_busy: list[dict[str, Any]] | None = None) -> dict[str, Any]:
         goals = load_goals()
+        if calendar_busy is None:
+            return {"ok": False, "violations": [
+                "calendar not checked: fetch the user's Google Calendar events (Composio) for the "
+                "plan dates and pass the timed ones as calendar_busy=[{title,start,end}] "
+                "(pass [] only if the calendar really has no timed events)"], "warnings": []}
+        tz = ZoneInfo(goals.get("athlete", {}).get("timezone", "America/Los_Angeles"))
+        busy = normalize_busy(calendar_busy, tz)
+        clash = []
+        for s in sessions:
+            if s.get("date") and s.get("duration_min") and not s.get("start_time"):
+                clash.append(f"{s.get('date')} {s.get('name')}: start_time HH:MM is required")
+                continue
+            try:
+                hits = conflicts(s, busy, tz)
+            except (KeyError, TypeError, ValueError):
+                continue  # shape errors are reported by check_plan
+            if hits:
+                clash.append(f"{s['date']} {s['start_time']} {s['name']}: overlaps calendar {', '.join(hits)} "
+                             "(use find_training_slots)")
         today = self.today()
         ws, _ = week_bounds(today)
         try:
@@ -97,6 +119,9 @@ class CoachService:
         except Exception:
             sleep = {}
         result = check_plan(sessions, completed, goals, sleep)
+        if clash:
+            result["violations"] = clash + result["violations"]
+            result["ok"] = False
         if not result["ok"]:
             return {"ok": False, **result, "hint": "Adjust the sessions and call propose_plan again."}
         payload = {"sessions": sessions, "rationale": rationale}
@@ -105,6 +130,9 @@ class CoachService:
         history.append("proposal", {"plan_id": plan_id, "rationale": rationale, "sessions": sessions})
         return {"ok": True, "plan_id": plan_id, **result,
                 "next": "Show the plan to the user and wait for explicit approval of this plan_id."}
+
+    def slots(self, day: str, duration_min: float, calendar_busy: list[dict[str, Any]]) -> dict[str, Any]:
+        return find_slots(day, duration_min, calendar_busy, load_goals())
 
     # ---------------- Step 4: apply approved plan ----------------
     def apply(self, plan_id: str, user_approval: str) -> dict[str, Any]:

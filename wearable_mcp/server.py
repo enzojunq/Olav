@@ -68,14 +68,28 @@ def reconcile(planned_sessions: list[dict[str, Any]] | None = None, days_back: i
 
 
 @mcp.tool()
-def propose_plan(sessions: list[dict[str, Any]], rationale: str) -> dict[str, Any]:
-    """Step 3 – validate proposed sessions against the athlete's hard limits (in code)
-    and store them. Each session: {name, sport (running|cycling|swimming|strength_training),
-    date YYYY-MM-DD, start_time HH:MM (local), duration_min, intensity (easy|moderate|hard),
-    description, steps?: [{type warmup|interval|recovery|cooldown|repeat, minutes|distance_m,
-    target?: {hr_zone}|{pace_min_km:[slow,fast]}|{power_w:[lo,hi]}, iterations?, steps?}],
-    replaces_scheduled_id?}. Returns plan_id when valid; otherwise violations to fix."""
-    return coach().propose(sessions, rationale)
+def find_training_slots(date: str, duration_min: float, calendar_busy: list[dict[str, Any]]) -> dict[str, Any]:
+    """Pick WHEN to train from the user's real calendar. First list the day's Google Calendar
+    events with Composio (GOOGLECALENDAR_EVENTS_LIST_ALL_CALENDARS), then pass every timed
+    event (meetings, flights, classes, social plans; skip all-day hotel stays) as
+    calendar_busy=[{title, start, end}] with ISO datetimes. Returns busy blocks, free windows
+    and ranked start times (past times excluded; preferred windows only break ties)."""
+    return coach().slots(date, duration_min, calendar_busy)
+
+
+@mcp.tool()
+def propose_plan(sessions: list[dict[str, Any]], rationale: str,
+                 calendar_busy: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    """Step 3 – validate proposed sessions against the athlete's hard limits AND the real
+    calendar (in code), then store them. calendar_busy is REQUIRED: the timed Google Calendar
+    events (via Composio) covering the plan dates, as [{title, start, end}] ISO datetimes;
+    sessions overlapping them (±15 min) are rejected. Each session: {name, sport
+    (running|cycling|swimming|strength_training), date YYYY-MM-DD, start_time HH:MM (local),
+    duration_min, intensity (easy|moderate|hard), description, steps?: [{type
+    warmup|interval|recovery|cooldown|repeat, minutes|distance_m, target?: {hr_zone}|
+    {pace_min_km:[slow,fast]}|{power_w:[lo,hi]}, iterations?, steps?}], replaces_scheduled_id?}.
+    Returns plan_id when valid; otherwise violations to fix."""
+    return coach().propose(sessions, rationale, calendar_busy)
 
 
 @mcp.tool()
