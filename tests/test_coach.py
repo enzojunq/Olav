@@ -34,7 +34,7 @@ def test_onboarding_required_before_planning(tmp_path, monkeypatch):
     monkeypatch.setenv("PROFILE_PATH", str(tmp_path / "none.yaml"))
     c = CoachService(MockProvider(), today=lambda: TODAY)
     r = c.propose([s(1)], "x", [])
-    assert r["needs_onboarding"] and len(r["questions"]) >= 5
+    assert r["needs_onboarding"] and len(r["questions"]) >= 3
     assert c.context()["needs_onboarding"]
     assert c.slots(TODAY.isoformat(), 30, [])["needs_onboarding"]
 

@@ -134,6 +134,29 @@ class GarminProvider(WearableProvider):
         r = raw[0] if isinstance(raw, list) else raw
         return {"date": date, "score": r.get("score"), "level": r.get("level")}
 
+    def athlete_metrics(self) -> dict[str, Any]:
+        out: dict[str, Any] = {}
+        try:
+            ud = (self.api.get_user_profile() or {}).get("userData", {})
+            lt_speed = ud.get("lactateThresholdSpeed")  # Garmin stores m/s / 10
+            out.update({
+                "vo2max_running": ud.get("vo2MaxRunning"),
+                "vo2max_cycling": ud.get("vo2MaxCycling"),
+                "lactate_threshold_hr": ud.get("lactateThresholdHeartRate"),
+                "lactate_threshold_pace_min_km": (
+                    f"{int(1000 / (lt_speed * 10) // 60)}:{int(1000 / (lt_speed * 10) % 60):02d}"
+                    if lt_speed else None),
+                "weight_kg": round(ud["weight"] / 1000, 1) if ud.get("weight") else None,
+            })
+        except Exception as e:
+            log.warning("user profile failed: %s", e)
+        try:
+            s = self.api.get_userprofile_settings() or {}
+            out["timezone"] = (s.get("userData") or s).get("timeZone")
+        except Exception as e:
+            log.warning("user settings failed: %s", e)
+        return {k: v for k, v in out.items() if v is not None}
+
     # ---------------- writes ----------------
     def create_workout(self, session: dict[str, Any]) -> str:
         res = self.api.upload_workout(build_garmin_workout(session))

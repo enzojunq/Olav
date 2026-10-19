@@ -14,6 +14,7 @@ from zoneinfo import ZoneInfo
 from . import history
 from .calendar import conflicts, find_slots, normalize_busy
 from .guardrails import check_plan, load_goals, week_bounds
+from .history_summary import summarize
 from .profile import ONBOARDING_QUESTIONS, ProfileMissing
 from .providers import WearableProvider, get_provider
 
@@ -82,6 +83,20 @@ class CoachService:
         if errors:
             ctx["errors"] = errors
         return ctx
+
+    def training_history(self, weeks: int = 8) -> dict[str, Any]:
+        """Habits inferred from the wearable: per-sport volume, usual times/days, long-run day,
+        physiology (vo2max, threshold) and timezone. Used to pre-fill onboarding."""
+        today = self.today()
+        start = today - timedelta(weeks=max(1, min(weeks, 26)))
+        acts = self.p.activities(start.isoformat(), today.isoformat())
+        out = summarize(acts, start, today)
+        try:
+            out["athlete_metrics"] = self.p.athlete_metrics()
+        except Exception as e:
+            out["athlete_metrics_error"] = str(e)[:200]
+        out["provider"] = self.p.name
+        return out
 
     # ---------------- Step 2: plan vs reality ----------------
     def reconcile(self, planned_sessions: list[dict[str, Any]] | None = None,

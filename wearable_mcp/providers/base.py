@@ -72,6 +72,10 @@ class WearableProvider(ABC):
     @abstractmethod
     def readiness(self, date: str) -> dict[str, Any] | None: ...
 
+    def athlete_metrics(self) -> dict[str, Any]:
+        """Optional: physiology + settings (vo2max, threshold HR/pace, timezone...)."""
+        return {}
+
     @abstractmethod
     def create_workout(self, session: dict[str, Any]) -> str:
         """Create a structured workout from a neutral session spec; return its id."""

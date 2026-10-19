@@ -17,13 +17,13 @@ import yaml
 
 EXAMPLE_PATH = Path(__file__).resolve().parent.parent / "config" / "athlete_profile.example.yaml"
 
+# Only what a wearable can't know. Habits (volume per sport, usual times, long-run day,
+# timezone, fitness) are inferred from get_training_history and just confirmed.
 ONBOARDING_QUESTIONS = [
-    "What are your goals, in priority order? (e.g. a race + date, strength, other sports)",
-    "Which sports do you train, and roughly how many hours per week for each?",
-    "What's the most you want to train per week (hours) and per session (minutes)?",
-    "How many hard sessions per week at most, and how many rest days at least?",
-    "When do you prefer to train on weekdays and weekends? A fixed day for the long session?",
-    "What's your timezone? Any injuries or restrictions I should respect?",
+    "Goals and priorities: which races/events (date, distance) and what matters most?",
+    "Max hours per week you want to train (I'll suggest one from your history)?",
+    "Any injuries or restrictions?",
+    "Confirm or correct what I inferred from your watch (sports mix, usual times, long-run day, timezone).",
 ]
 
 _WINDOW = re.compile(r"^\d{2}:\d{2}-\d{2}:\d{2}$")

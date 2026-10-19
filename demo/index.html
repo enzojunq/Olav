@@ -232,7 +232,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .rules{list-style:none;margin:.85rem 0 .8rem;display:grid;gap:.5rem}
 .rules li{display:grid;gap:.2rem;padding:.6rem .75rem .55rem;background:rgba(26,22,8,.1);border-radius:6px}
 .rules b{font-family:var(--display);font-weight:900;font-size:1.55rem;line-height:1;text-transform:uppercase;letter-spacing:.01em}
-.rules span{font-size:1.04rem;line-height:1.3}
+.rules span{font-size:1.2rem;line-height:1.3}
 .rules code{font-family:var(--mono);font-weight:500;font-size:.84rem;color:#5a4a10}
 .card .rule-foot{font-family:var(--display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.95rem}
 
@@ -375,7 +375,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <li><button class="rack" data-go="1"><b>1</b><span>Start</span></button></li>
         <li><button class="rack" data-go="2"><b>2</b><span>Context</span></button></li>
         <li><button class="rack" data-go="3"><b>3</b><span>Propose</span></button></li>
-        <li><button class="rack" data-go="4"><b>4</b><span>Referee</span></button></li>
+        <li><button class="rack" data-go="4"><b>4</b><span>Limits</span></button></li>
         <li><button class="rack" data-go="5"><b>5</b><span>Approve</span></button></li>
         <li><button class="rack" data-go="6"><b>6</b><span>Review</span></button></li>
         <li><button class="rack" data-go="7"><b>7</b><span>Open</span></button></li>
@@ -403,7 +403,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <div class="tag"><div class="val">Sleep 86 · 8 h 22</div><div class="note">Best night of the week.</div><div class="src">Garmin · Last night</div></div>
         <div class="tag warn"><div class="val">Readiness 51</div><div class="note">Moderate, after yesterday's ride.</div><div class="src">Garmin · Today</div></div>
         <div class="tag"><div class="val">4 h 00 ride · hard</div><div class="note">Aerobic effect high enough to count as hard.</div><div class="src">Garmin · Sunday</div></div>
-        <div class="tag bad"><div class="val">Last week 9 h 26</div><div class="note">Over the 8-hour weekly cap.</div><div class="src">wearable-mcp · vs goals.yaml</div></div>
+        <div class="tag bad"><div class="val">Last week 9 h 26</div><div class="note">Over the 8-hour weekly cap.</div><div class="src">Olav · vs your weekly cap</div></div>
         <div class="tag"><div class="val">Travel week</div><div class="note">Tue events 6–9 pm · Wed pickleball 3–5 pm · Thu red-eye 11:59 pm</div><div class="src">Google Calendar · via Composio</div></div>
       </div>
       <p class="verdict">Sleep says go. <mark>Readiness says easy.</mark></p>
@@ -433,11 +433,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
     <!-- 4 REFEREE -->
     <section class="scene" data-n="4" aria-labelledby="s4">
-      <h2 id="s4" class="sign">Code is the referee</h2>
+      <h2 id="s4" class="sign">It knows when to say no</h2>
       <div class="chat">
         <p class="msg me">Make it harder. Intervals Tuesday, tempo Wednesday, a 3-hour ride Saturday.</p>
-        <p class="tool"><span class="by">wearable-mcp</span> <span class="hl">propose_plan → <span class="no">ok: false</span> · 2 violations</span></p>
-        <p class="msg olav"><span class="who">Olav</span>I can't send that. Your limits live in <strong>goals.yaml</strong> and are checked in <strong>guardrails.py</strong>, so no prompt gets past them. I can move tempo to Thursday and cap Saturday at 2 h 30. With readiness at 51, I'd still keep this week easy.</p>
+        <p class="msg olav"><span class="who">Olav</span>I get it, you want more. But a 3-hour ride is past your 2 h 30 limit, and two hard days back to back is how injuries start. Your body is still recovering from Sunday. Let's do intervals Thursday and 2 h 30 on Saturday.</p>
       </div>
     </section>
 
@@ -496,13 +495,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </ol>
     <div class="stripe"><span>Limits enforced in code</span></div>
     <div class="card" role="status" aria-live="polite">
-      <h3>Blocked<br>by code</h3>
-      <p class="why">propose_plan() refused the plan. Two of your rules failed:</p>
+      <h3>Over your<br>limits</h3>
       <ol class="rules">
-        <li><b>Sat · 3-hour ride</b><span>Longest session allowed is 2 h 30. You asked for 3 h.</span><code>max_session_minutes: 150</code></li>
-        <li><b>Tue + Wed · both hard</b><span>No hard sessions on back-to-back days.</span><code>no_hard_days_in_a_row: true</code></li>
+        <li><b>Sat · 3-hour ride</b><span>Your longest session is 2 h 30.</span></li>
+        <li><b>Tue + Wed · both hard</b><span>Never two hard days in a row.</span></li>
       </ol>
-      <p class="rule-foot">Rules in goals.yaml · checked in guardrails.py · the model can't override them</p>
+      <p class="rule-foot">Limits you set once. No prompt talks Olav out of them.</p>
     </div>
   </div>
 

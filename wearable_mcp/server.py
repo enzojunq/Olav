@@ -80,6 +80,15 @@ def get_training_context(days_back: int = 7, days_ahead: int = 7) -> dict[str, A
 
 
 @mcp.tool()
+def get_training_history(weeks: int = 8) -> dict[str, Any]:
+    """What the athlete ACTUALLY does, from the wearable (default last 8 weeks): sessions and
+    hours/week per sport, longest sessions, hard sessions/week, rest days, usual training
+    times and days, long-run day, VO2max, lactate threshold HR/pace and timezone.
+    Call this BEFORE asking the user anything during onboarding; never ask what it answers."""
+    return coach().training_history(weeks)
+
+
+@mcp.tool()
 def reconcile(planned_sessions: list[dict[str, Any]] | None = None, days_back: int = 7) -> dict[str, Any]:
     """Step 2 – compare plan vs reality. Uses workouts scheduled on the watch plus any
     extra planned_sessions (e.g. parsed from '[Coach]' calendar events: name, sport,
