@@ -1,8 +1,12 @@
 # Hermes config for the Training Coach. Copied to ./hermes-data/config.yaml by
 # scripts/bootstrap.sh. Secrets come from env (${VAR} substitution).
 model:
-  provider: "openai-codex"     # ChatGPT subscription via OAuth (run: docker compose run --rm hermes model)
-  default: "gpt-5.5"
+  provider: "openai-codex"     # ChatGPT subscription via OAuth (run: docker compose run --rm hermes hermes model)
+  default: "gpt-6.1-sol"
+  base_url: "https://chatgpt.com/backend-api/codex"
+
+agent:
+  reasoning_effort: low
 
 terminal:
   backend: "local"             # Hermes itself is already sandboxed in Docker

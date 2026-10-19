@@ -7,7 +7,10 @@ cd "$(dirname "$0")/.."
 [ -f .env ] || { echo "Missing .env (copy .env.example)"; exit 1; }
 mkdir -p hermes-data/skills garmin-tokens data
 
-cp hermes/config.yaml hermes-data/config.yaml
+# Keep an existing config (Hermes edits it, e.g. after `hermes model`) unless --force.
+if [ ! -f hermes-data/config.yaml ] || [ "${1:-}" = "--force" ]; then
+  cp hermes/config.yaml hermes-data/config.yaml
+fi
 rm -rf hermes-data/skills/training-coach
 cp -R hermes/skills/training-coach hermes-data/skills/training-coach
 
