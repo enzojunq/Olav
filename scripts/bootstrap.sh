@@ -11,6 +11,7 @@ mkdir -p hermes-data/skills garmin-tokens data
 if [ ! -f hermes-data/config.yaml ] || [ "${1:-}" = "--force" ]; then
   cp hermes/config.yaml hermes-data/config.yaml
 fi
+cp hermes/SOUL.md hermes-data/SOUL.md   # persona: Olav, always English
 rm -rf hermes-data/skills/training-coach
 cp -R hermes/skills/training-coach hermes-data/skills/training-coach
 

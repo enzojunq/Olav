@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T21:08:32+00:00",
+  "title": "Design System: Olav",
+  "extensions": {
+    "colorMeta": {
+      "asphalt": {
+        "role": "neutral",
+        "displayName": "Transition Asphalt",
+        "canonical": "#1f2328",
+        "tonalRamp": [
+          "#080b10",
+          "#21252a",
+          "#3e4248",
+          "#5d6268",
+          "#7e8389",
+          "#a0a6ac",
+          "#c4cad0",
+          "#e9eff6"
+        ]
+      },
+      "asphalt-2": {
+        "role": "neutral",
+        "displayName": "Asphalt Panel",
+        "canonical": "#272c32",
+        "tonalRamp": [
+          "#070c11",
+          "#21262b",
+          "#3d4349",
+          "#5c6269",
+          "#7d838a",
+          "#9fa6ad",
+          "#c3cad2",
+          "#e8eff7"
+        ]
+      },
+      "asphalt-3": {
+        "role": "neutral",
+        "displayName": "Asphalt Chip",
+        "canonical": "#323840",
+        "tonalRamp": [
+          "#070b12",
+          "#20262d",
+          "#3c434b",
+          "#5b626b",
+          "#7c838c",
+          "#9ea6af",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "asphalt-4": {
+        "role": "neutral",
+        "displayName": "Asphalt Edge",
+        "canonical": "#3f4650",
+        "tonalRamp": [
+          "#060b13",
+          "#1f252f",
+          "#3c434c",
+          "#5a626c",
+          "#7b838e",
+          "#9ea6b1",
+          "#c1cad6",
+          "#e7effc"
+        ]
+      },
+      "hatch": {
+        "role": "neutral",
+        "displayName": "Hatch",
+        "canonical": "#4a525c",
+        "tonalRamp": [
+          "#060c13",
+          "#1f262e",
+          "#3b434c",
+          "#5a626c",
+          "#7b838e",
+          "#9da6b1",
+          "#c1cad6",
+          "#e6f0fc"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Road Text",
+        "canonical": "#e9ebe6",
+        "tonalRamp": [
+          "#0a0c09",
+          "#242622",
+          "#41433f",
+          "#60625e",
+          "#81837f",
+          "#a4a6a1",
+          "#c8cac5",
+          "#edefea"
+        ]
+      },
+      "text-mute": {
+        "role": "neutral",
+        "displayName": "Road Text Mute",
+        "canonical": "#aab1b9",
+        "tonalRamp": [
+          "#070c11",
+          "#20262c",
+          "#3d4349",
+          "#5c6269",
+          "#7c838b",
+          "#9fa6ae",
+          "#c3cad2",
+          "#e8eff8"
+        ]
+      },
+      "white-paint": {
+        "role": "neutral",
+        "displayName": "White Paint",
+        "canonical": "#eef0ea",
+        "tonalRamp": [
+          "#0b0c08",
+          "#242621",
+          "#41433e",
+          "#60625d",
+          "#81837e",
+          "#a4a6a0",
+          "#c8cac4",
+          "#edefe9"
+        ]
+      },
+      "paint": {
+        "role": "primary",
+        "displayName": "Thermoplastic Line Yellow",
+        "canonical": "#f3c22f",
+        "tonalRamp": [
+          "#180600",
+          "#3a1f00",
+          "#5f3a00",
+          "#865800",
+          "#a47c00",
+          "#c1a14d",
+          "#dfc78c",
+          "#fdedc7"
+        ]
+      },
+      "paint-ink": {
+        "role": "primary",
+        "displayName": "Paint Ink",
+        "canonical": "#1a1608",
+        "tonalRamp": [
+          "#0f0b01",
+          "#292516",
+          "#464232",
+          "#666151",
+          "#878271",
+          "#aaa593",
+          "#cec9b7",
+          "#f4efdb"
+        ]
+      },
+      "paint-ink-mute": {
+        "role": "primary",
+        "displayName": "Paint Ink Mute",
+        "canonical": "#5a4a10",
+        "tonalRamp": [
+          "#160800",
+          "#322300",
+          "#504002",
+          "#706029",
+          "#92814b",
+          "#b6a46d",
+          "#dac990",
+          "#fbeec7"
+        ]
+      },
+      "tyvek": {
+        "role": "neutral",
+        "displayName": "Tyvek",
+        "canonical": "#f3f2ec",
+        "tonalRamp": [
+          "#0c0b08",
+          "#262521",
+          "#43423d",
+          "#62615c",
+          "#83827d",
+          "#a6a5a0",
+          "#cac9c3",
+          "#f0efe9"
+        ]
+      },
+      "tyvek-ink": {
+        "role": "neutral",
+        "displayName": "Tyvek Ink",
+        "canonical": "#15171a",
+        "tonalRamp": [
+          "#090b0e",
+          "#232528",
+          "#404246",
+          "#5f6165",
+          "#808286",
+          "#a2a5a9",
+          "#c6c9ce",
+          "#eceff3"
+        ]
+      },
+      "tyvek-mute": {
+        "role": "neutral",
+        "displayName": "Tyvek Mute",
+        "canonical": "#585d63",
+        "tonalRamp": [
+          "#080b10",
+          "#21252b",
+          "#3e4248",
+          "#5d6268",
+          "#7e8389",
+          "#a0a6ac",
+          "#c4cad1",
+          "#e9eff6"
+        ]
+      },
+      "bag-blue": {
+        "role": "secondary",
+        "displayName": "Gear-Bag Cobalt",
+        "canonical": "#2d5bcc",
+        "tonalRamp": [
+          "#00062b",
+          "#091f57",
+          "#1b3b88",
+          "#3059bc",
+          "#577fd5",
+          "#82a4ea",
+          "#afc9ff",
+          "#ddefff"
+        ]
+      },
+      "bag-blue-deep": {
+        "role": "secondary",
+        "displayName": "Gear-Bag Cobalt Deep",
+        "canonical": "#1f469f",
+        "tonalRamp": [
+          "#00062b",
+          "#071f57",
+          "#1a3b88",
+          "#325bb6",
+          "#567fd5",
+          "#81a4ea",
+          "#aec9ff",
+          "#dcefff"
+        ]
+      },
+      "bag-blue-ink": {
+        "role": "secondary",
+        "displayName": "Bag Blue Ink",
+        "canonical": "#c9d6ff",
+        "tonalRamp": [
+          "#040723",
+          "#1b2341",
+          "#374061",
+          "#556083",
+          "#7581a6",
+          "#97a4cb",
+          "#bbc8f0",
+          "#e1edff"
+        ]
+      },
+      "bag-blue-ink-soft": {
+        "role": "secondary",
+        "displayName": "Bag Blue Ink Soft",
+        "canonical": "#dbe3ff",
+        "tonalRamp": [
+          "#06091b",
+          "#1f2438",
+          "#3b4157",
+          "#5a6078",
+          "#7a819a",
+          "#9da4be",
+          "#c0c8e3",
+          "#e5edff"
+        ]
+      },
+      "bag-red": {
+        "role": "tertiary",
+        "displayName": "Run-Bag Red",
+        "canonical": "#c62b23",
+        "tonalRamp": [
+          "#230000",
+          "#4c0102",
+          "#7a1711",
+          "#aa2d25",
+          "#c85d51",
+          "#e18a7e",
+          "#fab6ab",
+          "#ffe2db"
+        ]
+      },
+      "bag-red-ink": {
+        "role": "tertiary",
+        "displayName": "Bag Red Ink",
+        "canonical": "#ffd9d5",
+        "tonalRamp": [
+          "#1a0403",
+          "#371c1a",
+          "#573936",
+          "#785855",
+          "#9b7975",
+          "#bf9b98",
+          "#e4bfbb",
+          "#ffe4e0"
+        ]
+      },
+      "miss-on-asphalt": {
+        "role": "tertiary",
+        "displayName": "Miss On Asphalt",
+        "canonical": "#ff8a82",
+        "tonalRamp": [
+          "#230000",
+          "#4c0106",
+          "#7a1519",
+          "#a33735",
+          "#c85c57",
+          "#e28982",
+          "#fab5af",
+          "#ffe2dd"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Product name on the opening scene only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "One painted sign per scene; thesis and card title at 3.4rem."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Tag values, verdict captions, the approve bubble."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose; fluid root clamp(15px,1.04vw,24px)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Racks, tag sources, day names, chips, states. Uppercase."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Literal tool output and config keys only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "tag-rest",
+        "value": "0 2px 4px rgba(0,0,0,.28), 0 10px 22px -12px rgba(0,0,0,.6)",
+        "purpose": "Tyvek data tags."
+      },
+      {
+        "name": "queued-tag",
+        "value": "0 2px 5px rgba(0,0,0,.35)",
+        "purpose": "Session tags waiting at the line."
+      },
+      {
+        "name": "thrown-card",
+        "value": "0 6px 12px rgba(0,0,0,.3), 0 30px 60px -18px rgba(0,0,0,.75)",
+        "purpose": "The yellow card only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Default for scene swaps, state changes and the card snap."
+      },
+      {
+        "name": "ease-cross",
+        "value": "cubic-bezier(.45,0,.25,1)",
+        "purpose": "Session tags crossing the line, 0.9s each, staggered 0.1s."
+      },
+      {
+        "name": "scene-swap",
+        "value": "opacity .45s, transform .6s from translateY(.6rem)",
+        "purpose": "Scene enter."
+      },
+      {
+        "name": "card-snap",
+        "value": "rotate(-14deg) scale(1.35) to rotate(-4deg) scale(1), .45s",
+        "purpose": "Yellow card on block; out zone dims to .28."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "durations .01ms, animations none",
+        "purpose": "prefers-reduced-motion collapses all motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "short-laptop",
+        "value": "(max-height: 820px) and (min-width: 861px)"
+      },
+      {
+        "name": "narrow",
+        "value": "(max-width: 860px)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Scene Racks",
+      "kind": "nav",
+      "refersTo": "rack",
+      "description": "Numbered scene signage; current scene is solid Tyvek.",
+      "html": "<nav class=\"ds-racks\"><button class=\"ds-rack\"><b>1</b>Start</button><button class=\"ds-rack\" aria-current=\"step\"><b>2</b>Context</button><button class=\"ds-rack\"><b>3</b>Propose</button></nav>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-racks{display:flex;gap:.55rem;background:var(--asphalt);padding:1rem} .ds-rack{display:flex;align-items:center;gap:.5rem;padding:.32rem .75rem .32rem .38rem;border:2px solid var(--asphalt-4);border-radius:6px;background:none;color:var(--text-mute);font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background-color .25s cubic-bezier(.16,1,.3,1),color .25s,border-color .25s} .ds-rack b{display:grid;place-items:center;min-width:1.55rem;height:1.55rem;border-radius:4px;background:var(--asphalt-3);color:var(--text);font-weight:900;font-variant-numeric:tabular-nums} .ds-rack:hover{border-color:var(--text-mute);color:var(--text)} .ds-rack:focus-visible{outline:3px solid var(--paint);outline-offset:3px} .ds-rack[aria-current=\"step\"]{background:var(--tyvek);border-color:var(--tyvek);color:var(--tyvek-ink)} .ds-rack[aria-current=\"step\"] b{background:var(--tyvek-ink);color:var(--tyvek)}"
+    },
+    {
+      "name": "Tyvek Data Tag",
+      "kind": "card",
+      "refersTo": "tag",
+      "description": "The unit of data: value, note, source. Warn is paint, bad is red.",
+      "html": "<div class=\"ds-tags\"><div class=\"ds-tag\"><div class=\"ds-val\">Sleep 86 · 8 h 22</div><div class=\"ds-note\">Best night of the week.</div><div class=\"ds-src\">Garmin · Last night</div></div><div class=\"ds-tag ds-warn\"><div class=\"ds-val\">Readiness 51</div><div class=\"ds-note\">Moderate.</div><div class=\"ds-src\">Garmin · Today</div></div><div class=\"ds-tag ds-bad\"><div class=\"ds-val\">Last week 9 h 26</div><div class=\"ds-note\">Over the 8-hour cap.</div><div class=\"ds-src\">wearable-mcp</div></div></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-tags{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem;background:var(--asphalt);padding:1rem} .ds-tag{position:relative;background:var(--tyvek);color:var(--tyvek-ink);border-radius:7px;padding:.85rem 1rem .8rem;box-shadow:0 2px 4px rgba(0,0,0,.28),0 10px 22px -12px rgba(0,0,0,.6);font-family:var(--body)} .ds-tag::before{content:\"\";position:absolute;top:.62rem;right:.7rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--asphalt);opacity:.85} .ds-val{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.02;text-transform:uppercase;padding-right:1rem;font-variant-numeric:tabular-nums} .ds-note{font-size:.92rem;color:var(--tyvek-mute);margin-top:.2rem} .ds-src{font-family:var(--display);font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tyvek-mute);margin-top:.55rem;padding-top:.4rem;border-top:1px dashed currentColor} .ds-warn{background:var(--paint);color:var(--paint-ink)} .ds-warn .ds-src,.ds-warn .ds-note{color:#5a4a10} .ds-bad{background:var(--bag-red);color:#fff} .ds-bad .ds-src,.ds-bad .ds-note{color:#ffd9d5}"
+    },
+    {
+      "name": "Chat Bubbles",
+      "kind": "custom",
+      "refersTo": "bubble-agent",
+      "description": "Human on Tyvek, agent on cobalt; speaker-side corner tightened.",
+      "html": "<div class=\"ds-chat\"><p class=\"ds-msg ds-me\">Plan my week.</p><p class=\"ds-msg ds-olav\"><span class=\"ds-who\">Olav</span>Monday is rest after Sunday's 4-hour ride.</p></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-chat{display:flex;flex-direction:column;gap:.75rem;background:var(--asphalt);padding:1rem;font-family:var(--body)} .ds-msg{max-width:92%;margin:0;padding:.8rem 1.05rem;border-radius:14px;font-size:1.14rem;line-height:1.42} .ds-me{align-self:flex-end;background:var(--tyvek);color:var(--tyvek-ink);border-bottom-right-radius:4px;font-weight:600} .ds-olav{align-self:flex-start;background:var(--bag-blue);color:#fff;border-bottom-left-radius:4px} .ds-who{display:block;font-family:var(--display);font-weight:800;letter-spacing:.08em;font-size:.85rem;text-transform:uppercase;color:#c9d6ff;margin-bottom:.15rem}"
+    },
+    {
+      "name": "Tool Output",
+      "kind": "custom",
+      "refersTo": "tool-output",
+      "description": "Literal tool call in mono with one highlighted span.",
+      "html": "<div class=\"ds-wrap\"><p class=\"ds-tool\"><span class=\"ds-by\">wearable-mcp</span> propose_plan<br><span class=\"ds-hl\">propose_plan → <span class=\"ds-ok\">ok</span> · 5 h 10 of 8 h · 0 hard</span></p><p class=\"ds-tool\"><span class=\"ds-hl\"><span class=\"ds-by\">wearable-mcp</span> propose_plan → <span class=\"ds-no\">ok: false</span> · 2 violations</span></p></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-wrap{display:grid;gap:.6rem;justify-items:start;background:var(--asphalt);padding:1rem} .ds-tool{margin:0;font-family:var(--mono);font-weight:500;font-size:.9rem;line-height:1.5;background:var(--asphalt-2);color:var(--text-mute);border:1px solid var(--asphalt-4);border-radius:6px;padding:.45rem .7rem} .ds-by{color:var(--text)} .ds-hl{color:var(--text);background:linear-gradient(transparent 58%,rgba(243,194,47,.45) 58%)} .ds-ok{color:var(--paint)} .ds-no{color:#ff8a82}"
+    },
+    {
+      "name": "Calendar Chips",
+      "kind": "chip",
+      "refersTo": "chip-busy",
+      "description": "Busy time hatched, coach events cobalt, rest as a bare label.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip ds-busy\">18:00–21:00 Event</span><span class=\"ds-chip ds-coach\"><i>[Coach]</i> Easy run 40′</span><span class=\"ds-chip ds-rest\">Rest</span></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-chips{display:flex;flex-wrap:wrap;gap:.3rem;background:var(--asphalt);padding:1rem} .ds-chip{font-family:var(--display);font-weight:700;font-size:.94rem;letter-spacing:.03em;line-height:1.1;padding:.24rem .5rem;border-radius:5px;white-space:nowrap;font-variant-numeric:tabular-nums} .ds-busy{color:var(--text);background:repeating-linear-gradient(135deg,var(--asphalt-3) 0 6px,var(--asphalt-2) 6px 12px);border:1px solid var(--hatch)} .ds-coach{background:var(--bag-blue);color:#fff} .ds-coach i{font-style:normal;color:#c9d6ff} .ds-rest{color:var(--text-mute);letter-spacing:.08em;text-transform:uppercase;padding-left:0}"
+    },
+    {
+      "name": "Review States",
+      "kind": "chip",
+      "refersTo": "state-done",
+      "description": "Planned vs actual: done Tyvek, missed red, unplanned dashed.",
+      "html": "<div class=\"ds-states\"><span class=\"ds-state ds-done\">Done</span><span class=\"ds-state ds-missed\">Missed</span><span class=\"ds-state ds-unplanned\">Unplanned</span></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-states{display:flex;gap:.6rem;background:var(--asphalt-2);padding:1rem} .ds-state{display:inline-flex;align-items:center;font-family:var(--display);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.95rem;padding:.2rem .6rem;border-radius:4px} .ds-done{background:var(--tyvek);color:var(--tyvek-ink)} .ds-missed{background:var(--bag-red);color:#fff} .ds-unplanned{border:2px dashed var(--text-mute);color:var(--text);padding:.1rem .5rem}"
+    },
+    {
+      "name": "Yellow Card",
+      "kind": "custom",
+      "refersTo": "yellow-card",
+      "description": "The official's card: snaps onto the line when code blocks a plan.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-card\"><h3>Blocked by code</h3><ul><li><b>Sat · 3-hour ride</b><span>Longest session allowed is 2 h 30.</span><code>max_session_minutes: 150</code></li></ul></div></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-stage{background:var(--asphalt);padding:2rem} .ds-card{max-width:30rem;background:var(--paint);color:var(--paint-ink);border-radius:12px;padding:1.5rem 1.6rem 1.3rem;box-shadow:0 6px 12px rgba(0,0,0,.3),0 30px 60px -18px rgba(0,0,0,.75);transform:rotate(-4deg);font-family:var(--body);transition:transform .45s cubic-bezier(.16,1,.3,1)} .ds-card:hover{transform:rotate(-14deg) scale(1.05)} .ds-card h3{margin:0;font-family:var(--display);font-weight:900;font-size:3.4rem;line-height:.86;text-transform:uppercase} .ds-card ul{list-style:none;margin:.85rem 0 0;padding:0} .ds-card li{display:grid;gap:.2rem;padding:.6rem .75rem .55rem;background:rgba(26,22,8,.1);border-radius:6px} .ds-card b{font-family:var(--display);font-weight:900;font-size:1.55rem;line-height:1;text-transform:uppercase} .ds-card code{font-family:var(--mono);font-weight:500;font-size:.84rem;color:#5a4a10}"
+    },
+    {
+      "name": "Repo Link",
+      "kind": "button",
+      "refersTo": "repo-link",
+      "description": "The one call to action: Tyvek, turns paint on hover.",
+      "html": "<div class=\"ds-stage2\"><a class=\"ds-repo\" href=\"#\">github.com/olav</a></div>",
+      "css": ":host{--asphalt:#1f2328;--asphalt-2:#272c32;--asphalt-3:#323840;--asphalt-4:#3f4650;--paint:#f3c22f;--paint-ink:#1a1608;--tyvek:#f3f2ec;--tyvek-ink:#15171a;--tyvek-mute:#585d63;--bag-blue:#2d5bcc;--bag-red:#c62b23;--text:#e9ebe6;--text-mute:#aab1b9;--hatch:#4a525c;--display:\"Big Shoulders\",Impact,sans-serif;--body:\"Atkinson Next\",system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,monospace} .ds-stage2{background:var(--asphalt);padding:1.5rem} .ds-repo{font-family:var(--mono);font-weight:500;font-size:1.15rem;color:var(--tyvek-ink);background:var(--tyvek);padding:.55rem .9rem;border-radius:6px;text-decoration:none;transition:background-color .25s cubic-bezier(.16,1,.3,1)} .ds-repo:hover{background:var(--paint)} .ds-repo:focus-visible{outline:3px solid var(--paint);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Transition Zone",
+    "overview": "**Creative North Star: \"The Transition Zone\"**\n\nThe screen is a triathlon transition area: blue-tinted asphalt, one thermoplastic yellow line, the agent's gear on one side and the athlete's watch and calendar on the other. Everything is read from distance, so signage is huge, condensed and capitalised, and body copy is set for legibility first. The ground is dark and grainy; objects on it (number tags, the yellow card, chat bubbles) are flat painted or printed material, lifted only by soft ambient shadow.\n\nColour is never decoration. Each hue is a material with one job: paint for rules and limits, cobalt for the agent, red for penalties and misses, Tyvek for sessions and data. If an element carries no role or state, it stays asphalt and grey.",
+    "keyCharacteristics": [
+      "Full-bleed grainy asphalt ground; three columns (in, line, out) with the line as a fixed-width gutter.",
+      "Big Shoulders signage caps for every heading, label and number; Atkinson Hyperlegible Next for prose; JetBrains Mono only for tool output.",
+      "Tyvek tags with dark numerals as the unit of data.",
+      "Dashed paint-white dividers, like marked bays.",
+      "Motion is literal: tags cross the line, the card snaps onto it."
+    ],
+    "rules": [
+      {
+        "name": "The Role-Only Rule",
+        "body": "Colour encodes a role or a state. Yellow is a rule or limit, cobalt is the agent, red is a penalty or miss, Tyvek is a session or data point. Anything else is asphalt and grey.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Agent Colour Rule",
+        "body": "Cobalt appears only where the agent speaks or acts. Never use it for links, buttons or decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Signage Rule",
+        "body": "Every heading, label, number and state is Big Shoulders in caps; every sentence is Atkinson in sentence case. Numbers use tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Machine Voice Rule",
+        "body": "Mono is reserved for literal tool output and config keys. Never set prose or UI labels in mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Objects-Only Shadow Rule",
+        "body": "Shadows belong to things that physically lie on the asphalt (tags, the card, the watch). Panels, rows and chips are flat tone steps.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do give every coloured element a role: paint for rules, cobalt for the agent, red for misses, Tyvek for sessions and data.",
+      "Do set headings, labels and numbers in Big Shoulders caps with tabular figures, and prose in Atkinson Hyperlegible Next.",
+      "Do highlight exactly one span per tool output with the yellow underpaint.",
+      "Do honour reduced motion: transitions and animations collapse to instant.",
+      "Do keep focus visible with a 3px paint outline at 3px offset."
+    ],
+    "donts": [
+      "Don't use cobalt for anything that is not the agent.",
+      "Don't use yellow as decoration; it always means a rule, a limit, or the accepted path.",
+      "Don't set prose or labels in mono, or headings in the body face.",
+      "Don't add shadows to flat panels, rows or chips, and never use hard offset shadows."
+    ]
+  }
+}
