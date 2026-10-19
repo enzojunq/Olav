@@ -2,10 +2,11 @@
 
 **An open-source AI training coach on Telegram. The model proposes. Code decides. You approve.**
 
-Olav reads your Garmin (sleep, readiness, what you actually trained) and your Google Calendar,
-plans your week around real life, and only after you say **approve** sends structured workouts
-to your watch and `[Coach]` events to your calendar. Your limits live in code, so no prompt can
-talk the agent past them.
+Olav adapts your routine on its own. Every morning it reads your Garmin (sleep, readiness,
+what you actually trained) and your Google Calendar, re-plans your week around real life, and
+sends you the result. Your only input is **approve**: then it sends structured workouts to your
+watch and `[Coach]` events to your calendar. Your limits live in code, so no prompt can talk the
+agent past them.
 
 **[▶ Demo video](https://youtu.be/pbXXiwOorRU)** · **[Live slides](https://enzojunq.github.io/Olav/demo/)** (← → or 1–7) · **[Deck PDF](demo/Olav-deck.pdf)** · **[Telegram prompts](docs/demo-script.md)**
 
@@ -127,6 +128,8 @@ and the agent stay the same.
 - **Slides:** they replay a real session from Oct 19, 2026, with the chat condensed and translated
   from Portuguese. The watch on the slides is a drawing.
 - **Mock provider:** `WEARABLE_PROVIDER=mock` is simulated and used only in tests and offline demos.
+- **Daily check-in:** runs as a Hermes cron job you create with one message (see *Run it*);
+  it was not part of the recorded video.
 - **Not built yet:** an automatic post-workout trigger (follow-up runs on request or by cron),
   and wearable brands other than Garmin.
 
