@@ -1,12 +1,11 @@
 """Code-enforced training limits (the LLM cannot talk its way past these).
 
-``check_plan`` validates a list of proposed sessions against goals.yaml limits,
+``check_plan`` validates a list of proposed sessions against the limits in the athlete profile,
 taking into account sessions already completed this week.
 """
 
 from __future__ import annotations
 
-import os
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
@@ -18,8 +17,18 @@ VALID_INTENSITY = {"easy", "moderate", "hard"}
 
 
 def load_goals(path: str | None = None) -> dict[str, Any]:
-    p = Path(path or os.getenv("GOALS_PATH", "config/goals.yaml"))
-    return yaml.safe_load(p.read_text())
+    """The athlete's confirmed profile (collected during onboarding).
+
+    Raises ProfileMissing if the user hasn't been onboarded yet: limits are never invented.
+    """
+    if path:
+        return yaml.safe_load(Path(path).read_text())
+    from .profile import ProfileMissing, load_profile
+
+    prof = load_profile()
+    if not prof:
+        raise ProfileMissing("athlete profile not set up yet")
+    return prof
 
 
 def week_bounds(d: date) -> tuple[date, date]:

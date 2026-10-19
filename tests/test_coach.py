@@ -5,16 +5,46 @@ import pytest
 from wearable_mcp.calendar import find_slots
 from wearable_mcp.coach import CoachService
 from wearable_mcp.guardrails import check_plan, load_goals
+from wearable_mcp.profile import example_profile, save_profile, validate_profile
 from wearable_mcp.providers.garmin_workout import build_garmin_workout
 from wearable_mcp.providers.mock import MockProvider
 
 TODAY = date(2026, 10, 19)  # Monday
 
 
+TEST_PROFILE = {
+    "athlete": {"timezone": "America/Los_Angeles"},
+    "goals": [{"priority": "A", "description": "Half marathon", "date": "2026-12-13", "sport": "running"}],
+    "preferences": {"preferred_windows": {"weekday": ["06:00-08:00"], "weekend": ["07:00-11:00"]}},
+    "limits": {"max_weekly_hours": 8.0, "max_session_minutes": 150, "max_hard_sessions_per_week": 2,
+               "min_rest_days_per_week": 1, "no_hard_after_sleep_score_below": 55,
+               "no_hard_days_in_a_row": True, "taper_start_days_before_race": 10},
+}
+
+
 @pytest.fixture(autouse=True)
 def _tmp_data(tmp_path, monkeypatch):
     monkeypatch.setenv("DATA_DIR", str(tmp_path))
     monkeypatch.setenv("HISTORY_PATH", str(tmp_path / "history.jsonl"))
+    monkeypatch.setenv("PROFILE_PATH", str(tmp_path / "athlete_profile.yaml"))
+    assert save_profile(TEST_PROFILE, "yes, correct")["ok"]
+
+
+def test_onboarding_required_before_planning(tmp_path, monkeypatch):
+    monkeypatch.setenv("PROFILE_PATH", str(tmp_path / "none.yaml"))
+    c = CoachService(MockProvider(), today=lambda: TODAY)
+    r = c.propose([s(1)], "x", [])
+    assert r["needs_onboarding"] and len(r["questions"]) >= 5
+    assert c.context()["needs_onboarding"]
+    assert c.slots(TODAY.isoformat(), 30, [])["needs_onboarding"]
+
+
+def test_profile_validation_and_confirmation():
+    assert not save_profile(TEST_PROFILE, "")["ok"]                 # needs user confirmation
+    bad = {**TEST_PROFILE, "limits": {"max_weekly_hours": 100}, "athlete": {"timezone": "Mars/Base"}}
+    errs = save_profile(bad, "ok")["errors"]
+    assert any("timezone" in e for e in errs) and any("max_weekly_hours" in e for e in errs)
+    assert validate_profile(example_profile()) == []                # template is valid
 
 
 def s(day_offset, sport="running", minutes=45, intensity="easy", name=None):

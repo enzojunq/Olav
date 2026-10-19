@@ -1,0 +1,40 @@
+# EXAMPLE ONLY: shows the structure of an athlete profile. The real profile is
+# collected from the user in the first conversation (Olav asks), confirmed by the user,
+# and saved to data/athlete_profile.yaml by save_athlete_profile. The `limits` block of
+# the saved profile is enforced in code.
+athlete:
+  name: Alex Example
+  timezone: Europe/Lisbon
+
+goals:
+  - id: marathon
+    priority: A
+    description: Spring marathon
+    date: "2027-04-11"
+    sport: running
+  - id: strength
+    priority: B
+    description: Strength training once a week
+    sport: strength_training
+
+weekly_template:            # hours per sport the athlete wants as a baseline
+  running: 4.0
+  strength_training: 1.0
+
+preferences:
+  preferred_windows:        # local time; only a tie-breaker, the real calendar wins
+    weekday: ["06:30-08:00"]
+    weekend: ["08:00-11:00"]
+  long_session_day: Saturday
+  calendar_event_prefix: "[Coach]"
+
+limits:                     # enforced by code
+  max_weekly_hours: 5.0
+  max_session_minutes: 180
+  max_hard_sessions_per_week: 2
+  min_rest_days_per_week: 2
+  no_hard_after_sleep_score_below: 50
+  no_hard_days_in_a_row: true
+  taper_start_days_before_race: 14
+
+notes: "Old calf strain: avoid two running days in a row."

@@ -31,6 +31,8 @@ First user: me, training for a **December half marathon**, keeping gym 2x/week a
 
 # What it does (daily loop on Telegram)
 
+0. **Onboarding**: the first chat asks your goals, hours, limits, times and injuries, and saves them after you confirm
+
 1. **Context**: sleep, readiness, activities, **last watch sync**, calendar (travel, meetings)
 2. **Plan vs reality**: done / partial / missed / unplanned, plus conflicts
 3. **Proposal**: keeps / changes / **why**, checked against the limits **in code**

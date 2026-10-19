@@ -17,8 +17,8 @@ from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
 from . import history
-from .coach import CoachService
-from .guardrails import load_goals
+from .coach import CoachService, needs_onboarding
+from .profile import ONBOARDING_QUESTIONS, example_profile, load_profile, save_profile
 
 load_dotenv()
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
@@ -28,7 +28,7 @@ mcp = FastMCP(
     "wearable-coach",
     instructions=(
         "Wearable data and structured-workout delivery for a training coach. "
-        "Always call get_training_context first. Never call apply_plan unless "
+        "Always call get_athlete_profile first; if needs_onboarding, interview the user before planning. Never call apply_plan unless "
         "the user explicitly approved that exact plan_id."
     ),
     host=os.getenv("MCP_HOST", "0.0.0.0"),
@@ -47,8 +47,28 @@ def coach() -> CoachService:
 
 @mcp.tool()
 def get_athlete_profile() -> dict[str, Any]:
-    """Return the athlete's goals, weekly template, preferences and hard limits (goals.yaml)."""
-    return load_goals()
+    """Return the athlete's confirmed profile (goals, weekly template, preferences, hard limits).
+    If it doesn't exist yet, returns needs_onboarding=true with the questions to ask the user."""
+    prof = load_profile()
+    return prof if prof else needs_onboarding()
+
+
+@mcp.tool()
+def get_profile_template() -> dict[str, Any]:
+    """Structure expected by save_athlete_profile, with an EXAMPLE athlete. Never save the
+    example values: every field must come from the user's answers."""
+    return {"questions": ONBOARDING_QUESTIONS, "example_only_do_not_save": example_profile()}
+
+
+@mcp.tool()
+def save_athlete_profile(profile: dict[str, Any], user_confirmation: str) -> dict[str, Any]:
+    """Onboarding: save the athlete profile built ONLY from the user's answers, after showing
+    them a summary and getting explicit confirmation (quote it in user_confirmation).
+    Also used later when the user changes goals or limits. Required: athlete.timezone,
+    goals[] (description, priority A/B/C, optional date, sport), limits.max_weekly_hours.
+    Optional: weekly_template (hours per sport), preferences (preferred_windows,
+    long_session_day), other limits, notes (injuries/restrictions)."""
+    return save_profile(profile, user_confirmation)
 
 
 @mcp.tool()

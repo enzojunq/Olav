@@ -8,6 +8,12 @@ Built at the Cline × Composio × Parallel hackathon (Oct 19, 2026). First user:
 training for a December half marathon while keeping gym, bike and swim for a 2027 triathlon,
 with an 8h/week budget.
 
+## First interaction: onboarding
+Nothing about the athlete is hardcoded. In the first conversation Olav asks for your goals and priorities,
+sports and hours, weekly and per-session limits, hard sessions and rest days, preferred times,
+timezone and injuries. It shows a summary, and saves `data/athlete_profile.yaml` only after you confirm.
+Until then, planning tools return `needs_onboarding`. `config/athlete_profile.example.yaml` only shows the format.
+
 ## Daily loop
 1. **Context:** sleep, readiness, activities, scheduled workouts and **last watch sync time**
    (Garmin), plus calendar events (Google Calendar via Composio).
@@ -25,7 +31,9 @@ Telegram ──► Hermes Agent (Docker; LLM = ChatGPT/Codex OAuth)
               │  skill: training-coach (5-step loop, approval rule)
               ├─► wearable MCP  (ours, Python, Docker)  ──► Garmin Connect
               │     providers/base.py  ← brand-agnostic interface (Garmin, Mock, …)
-              │     guardrails.py      ← code-enforced limits from config/goals.yaml
+              │     profile.py         ← athlete profile collected in onboarding
+              │     guardrails.py      ← code-enforced limits from that profile
+              │     calendar.py        ← free slots / conflicts from the real calendar
               │     propose_plan → plan_id → apply_plan (two-phase writes)
               ├─► Composio MCP (connect.composio.dev) ──► Google Calendar
               └─► Parallel Search MCP (search.parallel.ai) ──► gyms/pools/routes while travelling
@@ -41,7 +49,7 @@ Telegram ──► Hermes Agent (Docker; LLM = ChatGPT/Codex OAuth)
 
 **Why the plan is safe:** the LLM can only send workouts through `apply_plan(plan_id)`.
 A `plan_id` only exists if `propose_plan` validated the sessions against the limits in
-`config/goals.yaml`. The agent cannot talk its way past the limits.
+the athlete profile **the user confirmed during onboarding**, and checked it against the real calendar. The agent cannot talk its way past the limits.
 
 ## Run it
 Requirements: Docker Desktop, a Telegram bot token (@BotFather), a Composio consumer API key,

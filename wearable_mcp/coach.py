@@ -14,9 +14,18 @@ from zoneinfo import ZoneInfo
 from . import history
 from .calendar import conflicts, find_slots, normalize_busy
 from .guardrails import check_plan, load_goals, week_bounds
+from .profile import ONBOARDING_QUESTIONS, ProfileMissing
 from .providers import WearableProvider, get_provider
 
 log = logging.getLogger(__name__)
+
+
+def needs_onboarding() -> dict[str, Any]:
+    return {"ok": False, "needs_onboarding": True,
+            "message": "No athlete profile yet. Ask the user these questions (conversationally, "
+                       "a few at a time), summarize, get confirmation, then call save_athlete_profile.",
+            "questions": ONBOARDING_QUESTIONS,
+            "schema_example": "call get_profile_template for the expected structure"}
 
 
 class CoachService:
@@ -55,13 +64,19 @@ class CoachService:
         safe("scheduled_workouts", lambda: self.p.scheduled_workouts(today.isoformat(), end))
         week = [a for a in ctx.get("activities") or [] if ws.isoformat() <= a["date"] <= we.isoformat()]
         minutes = sum(a["duration_min"] for a in week)
+        try:
+            budget = round(load_goals()["limits"]["max_weekly_hours"] - minutes / 60, 2)
+        except ProfileMissing:
+            budget = None
+            ctx["needs_onboarding"] = True
+            ctx["onboarding_questions"] = ONBOARDING_QUESTIONS
         ctx["week_to_date"] = {
             "week_start": ws.isoformat(),
             "hours": round(minutes / 60, 2),
             "hard_sessions": sum(1 for a in week if a.get("hard")),
             "by_sport_min": {s: round(sum(a["duration_min"] for a in week if a["sport"] == s))
                              for s in sorted({a["sport"] for a in week})},
-            "remaining_hours_budget": round(load_goals()["limits"]["max_weekly_hours"] - minutes / 60, 2),
+            "remaining_hours_budget": budget,
         }
         ctx["recent_reviews"] = history.read(limit=5, kind="review")
         if errors:
@@ -84,7 +99,10 @@ class CoachService:
     # ---------------- Step 3: propose (validated in code) ----------------
     def propose(self, sessions: list[dict[str, Any]], rationale: str,
                 calendar_busy: list[dict[str, Any]] | None = None) -> dict[str, Any]:
-        goals = load_goals()
+        try:
+            goals = load_goals()
+        except ProfileMissing:
+            return needs_onboarding()
         if calendar_busy is None:
             return {"ok": False, "violations": [
                 "calendar not checked: fetch the user's Google Calendar events (Composio) for the "
@@ -132,7 +150,11 @@ class CoachService:
                 "next": "Show the plan to the user and wait for explicit approval of this plan_id."}
 
     def slots(self, day: str, duration_min: float, calendar_busy: list[dict[str, Any]]) -> dict[str, Any]:
-        return find_slots(day, duration_min, calendar_busy, load_goals())
+        try:
+            goals = load_goals()
+        except ProfileMissing:
+            return needs_onboarding()
+        return find_slots(day, duration_min, calendar_busy, goals)
 
     # ---------------- Step 4: apply approved plan ----------------
     def apply(self, plan_id: str, user_approval: str) -> dict[str, Any]:
