@@ -8,6 +8,11 @@ Built at the Cline × Composio × Parallel hackathon (Oct 19, 2026). First user:
 training for a December half marathon while keeping gym, bike and swim for a 2027 triathlon,
 with an 8h/week budget.
 
+## Demo
+- **Video:** https://youtu.be/pbXXiwOorRU
+- **Slides:** [`demo/index.html`](demo/index.html) (open locally, full screen, ← → or 1–7) · PDF: [`demo/Olav.pdf`](demo/Olav.pdf)
+- **Telegram prompts used in the video:** [`docs/demo-script.md`](docs/demo-script.md)
+
 ## First interaction: onboarding
 Nothing about the athlete is hardcoded. In the first conversation Olav asks for your goals and priorities,
 sports and hours, weekly and per-session limits, hard sessions and rest days, preferred times,
@@ -85,9 +90,14 @@ history and the agent stay the same.
 - Real: Garmin data and workout push (unofficial `garminconnect` API), Google Calendar via
   Composio, Parallel search, Hermes + Telegram.
 - `WEARABLE_PROVIDER=mock` is a **simulated** provider used in tests and offline demos only.
+- The slides (`demo/index.html`) replay a real session from Oct 19, 2026, with the chat condensed
+  and translated from Portuguese. The Telegram part of the video is live.
 - Not built yet: automatic post-workout trigger (follow-up runs on request or by cron),
   and brands other than Garmin.
 
 ## Security notes
 `.env`, `garmin-tokens/`, `hermes-data/` and `data/` are git-ignored. The Garmin password is only
 used for the first login; after that, cached tokens are used. Only `TELEGRAM_ALLOWED_USERS` can talk to the bot.
+
+## License
+MIT. See [LICENSE](LICENSE).

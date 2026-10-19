@@ -360,6 +360,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .disclaimer{text-align:left;margin-left:0;font-size:.78rem}
 }
 
+@media print{
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .keys{display:none}
+  .disclaimer{margin-left:0;text-align:left}
+  .strap{-webkit-mask:none;mask:none;background:#262a2f;height:20%}
+  .strap.top{bottom:88%}.strap.bot{top:88%}
+  .is-blocked .out{opacity:1;position:relative}
+  .is-blocked .out::after{content:"";position:absolute;inset:0;z-index:4;background:rgba(31,35,40,.74)}
+  *,*::before,*::after{box-shadow:none!important}
+  .card{outline:2px solid rgba(0,0,0,.35)}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
 }
@@ -414,9 +426,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <h2 id="s3" class="sign">It plans around your life</h2>
       <div class="chat">
         <p class="msg me">Plan my week.</p>
-        <p class="tool"><span class="by">wearable-mcp</span> get_training_context · reconcile &nbsp;·&nbsp; <span class="by">Composio</span> Google Calendar &nbsp;·&nbsp; <span class="by">Parallel</span> web search<br><span class="hl">propose_plan → <span class="ok">ok</span> · 5 h 10 of 8 h · 0 hard · plan_id 3457dd270f</span></p>
+        <p class="tool"><span class="by">wearable-mcp</span> get_training_context · reconcile &nbsp;·&nbsp; <span class="by">Composio</span> Google Calendar<br><span class="hl">propose_plan → <span class="ok">ok</span> · 5 h 10 of 8 h · 0 hard · plan_id 3457dd270f</span></p>
         <div class="msg olav"><span class="who">Olav</span>
-          Monday is rest after Sunday's 4-hour ride. Sleep is 86 but readiness is 51, so the whole week stays easy and I'm not making up the missed 4×1600. Tuesday is mornings only, strength goes after pickleball, and you run Thursday before the red-eye. The gym at Parc 55 is confirmed on Hilton's site.
+          Monday is rest after Sunday's 4-hour ride. Sleep is 86 but readiness is 51, so the whole week stays easy and I'm not making up the missed 4×1600. Tuesday is mornings only, strength goes after pickleball, and you run Thursday before the red-eye. You're staying at the Hilton Parc 55, so strength is in the hotel gym.
           <ul class="plan">
             <li><span class="d">Tue 06:00</span><span>Easy run · treadmill</span><span class="t">40′ Z2</span></li>
             <li><span class="d">Tue 06:45</span><span>Strength A · hotel gym</span><span class="t">40′</span></li>
@@ -471,7 +483,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <div class="flow">
         <div class="hop"><span class="n">Telegram</span><p>Where you talk to your coach. A daily cron check-in plus anything you ask.</p></div>
         <div class="hop"><span class="n">Hermes Agent</span><p>Open-source agent runtime in Docker. The <b>training-coach</b> skill runs the five-step loop and the approval rule.</p></div>
-        <div class="hop"><span class="n ours">wearable-mcp</span><p>Ours, in Python. Garmin reads and writes, <b>guardrails.py</b> against <b>goals.yaml</b>, and two-phase writes: propose_plan stores a hashed plan, apply_plan executes exactly that plan. Brand-agnostic provider interface.</p></div>
+        <div class="hop"><span class="n ours">wearable-mcp</span><p>Ours, in Python. Garmin reads and writes, <b>guardrails.py</b> enforcing the limits you confirmed at onboarding, and two-phase writes: propose_plan stores a hashed plan, apply_plan executes exactly that plan. Brand-agnostic provider interface.</p></div>
         <div class="hop"><span class="n">Composio</span><p>Google Calendar: free slots, events, and the [Coach] entries.</p></div>
         <div class="hop"><span class="n">Parallel</span><p>Web search when the plan needs the outside world, like a hotel gym on a trip.</p></div>
       </div>
