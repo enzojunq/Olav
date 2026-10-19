@@ -10,7 +10,7 @@ with an 8h/week budget.
 
 ## Demo
 - **Video:** https://youtu.be/pbXXiwOorRU
-- **Slides:** [`demo/index.html`](demo/index.html) (open locally, full screen, ← → or 1–7) · Deck (5 slides): [`demo/Olav-deck.pdf`](demo/Olav-deck.pdf) · all 7 scenes: [`demo/Olav.pdf`](demo/Olav.pdf)
+- **Slides (live):** https://enzojunq.github.io/Olav/demo/ (full screen, ← → or 1–7) · Deck (5 slides): [`demo/Olav-deck.pdf`](demo/Olav-deck.pdf) · all 7 scenes: [`demo/Olav.pdf`](demo/Olav.pdf)
 - **Telegram prompts used in the video:** [`docs/demo-script.md`](docs/demo-script.md)
 
 ## First interaction: onboarding
