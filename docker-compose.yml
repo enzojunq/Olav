@@ -1,0 +1,35 @@
+# Training Coach: Hermes agent (Telegram) + our wearable MCP server, sandboxed.
+#
+#   docker compose run --rm wearable-mcp wearable-login   # once, Garmin login (+MFA)
+#   docker compose run --rm hermes model                  # once, pick ChatGPT/Codex OAuth
+#   docker compose up -d
+services:
+  wearable-mcp:
+    build: .
+    container_name: wearable-mcp
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WEARABLE_PROVIDER=${WEARABLE_PROVIDER:-garmin}
+    volumes:
+      - ./garmin-tokens:/tokens
+      - ./data:/data
+      - ./config:/app/config:ro
+    ports:
+      - "127.0.0.1:8000:8000"   # local debugging only
+    stdin_open: true
+    tty: true
+
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes
+    restart: unless-stopped
+    depends_on:
+      - wearable-mcp
+    env_file: .env
+    environment:
+      - HERMES_UID=${HERMES_UID:-10000}
+      - HERMES_GID=${HERMES_GID:-10000}
+    volumes:
+      - ./hermes-data:/opt/data
+    command: ["gateway", "run"]

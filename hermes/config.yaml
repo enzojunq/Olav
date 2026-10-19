@@ -1,0 +1,24 @@
+# Hermes config for the Training Coach. Copied to ./hermes-data/config.yaml by
+# scripts/bootstrap.sh. Secrets come from env (${VAR} substitution).
+model:
+  provider: "openai-codex"     # ChatGPT subscription via OAuth (run: docker compose run --rm hermes model)
+  default: "gpt-5.5"
+
+terminal:
+  backend: "local"             # Hermes itself is already sandboxed in Docker
+  cwd: "/opt/data"
+
+timezone: "America/Los_Angeles"
+
+mcp_servers:
+  wearable:
+    url: "http://wearable-mcp:8000/mcp"
+    timeout: 120
+  composio:
+    url: "https://connect.composio.dev/mcp"
+    headers:
+      x-consumer-api-key: "${COMPOSIO_API_KEY}"
+    timeout: 120
+  parallel:
+    url: "https://search.parallel.ai/mcp"
+    timeout: 60

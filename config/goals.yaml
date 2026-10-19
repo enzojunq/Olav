@@ -1,0 +1,42 @@
+# Athlete goals and hard limits. The wearable-mcp server enforces the `limits`
+# block in code: write tools refuse anything that violates them.
+athlete:
+  name: Enzo
+  timezone: America/Los_Angeles
+
+goals:
+  - id: half_marathon
+    priority: A
+    description: Half marathon race
+    date: "2026-12-13"        # adjust to the real race date
+    sport: running
+  - id: strength_maintenance
+    priority: B
+    description: Keep strength/physique in the gym (2x/week)
+    sport: strength_training
+  - id: triathlon_base
+    priority: C
+    description: Keep bike and swim base for a 2027 triathlon
+    sport: [cycling, swimming]
+
+weekly_template:            # guideline the agent starts from (hours)
+  running: 3.5              # 3-4 runs: easy, quality, long run
+  strength_training: 2.0    # 2 gym sessions
+  cycling: 1.5              # 1 ride
+  swimming: 1.0             # 1-2 swims
+
+preferences:
+  preferred_windows:        # local time
+    weekday: ["06:00-08:00", "18:00-20:00"]
+    weekend: ["07:00-11:00"]
+  long_run_day: Sunday
+  calendar_event_prefix: "[Coach]"
+
+limits:                     # enforced by code
+  max_weekly_hours: 8.0
+  max_session_minutes: 150
+  max_hard_sessions_per_week: 2      # sessions with intensity=hard
+  min_rest_days_per_week: 1
+  no_hard_after_sleep_score_below: 55
+  no_hard_days_in_a_row: true
+  taper_start_days_before_race: 10   # inside this window: no session > 90 min
